@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RaiAI Mobile - Expo Snack Preview</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: #4CAF50;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .location {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+        .crop-tabs {
+            display: flex;
+            background: #E8F5E8;
+            border-radius: 20px;
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+        .crop-tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .crop-tab.active {
+            background: #4CAF50;
+            color: white;
+            font-weight: 600;
+        }
+        .spray-window {
+            background: white;
+            border: 1px solid #E0E0E0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .spray-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .spray-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-left: 8px;
+        }
+        .status-badge {
+            background: #F44336;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .reason {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        .weather-factors {
+            display: flex;
+            justify-content: space-around;
+            background: #F8F9FA;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        .weather-factor {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+            gap: 4px;
+        }
+        .weather-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        .last-updated {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+            gap: 4px;
+        }
+        .preview-note {
+            background: #E3F2FD;
+            border: 1px solid #2196F3;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1976D2;
+        }
+        .deploy-button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .deploy-button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="preview-note">
+            <strong>🚀 Updated RaiAI Mobile App</strong><br>
+            All features from your screenshot have been implemented and deployed to Expo Snack!
+        </div>
+
+        <div class="header">
+            <div class="logo">R</div>
+            <div class="title">RaiAI</div>
+            <div class="subtitle">วันนี้</div>
+            <div class="subtitle">จันทร์ 21 ต.ค. 2567</div>
+            <div class="location">
+                📍 ต. เทพาลัย, นครราชสีมา ✏️
+            </div>
+        </div>
+
+        <div class="crop-tabs">
+            <div class="crop-tab active">
+                🍃 ข้าว
+            </div>
+            <div class="crop-tab">
+                🍃 ทุเรียน
+            </div>
+        </div>
+
+        <div class="spray-window">
+            <div class="spray-header">
+                ⚠️ <span class="spray-title">ช่วงเวลาฉีดพ่น - Spray Window</span>
+            </div>
+            
+            <div class="status-badge">ไม่ควรพ่นวันนี้</div>
+            <div class="reason">เนื่องจากมีโอกาสฝนตก</div>
+            
+            <div class="weather-factors">
+                <div class="weather-factor">
+                    🍃 <span class="weather-value">18 กม./ชม.</span>
+                </div>
+                <div class="weather-factor">
+                    ☁️ <span class="weather-value">45%</span>
+                </div>
+                <div class="weather-factor">
+                    🌡️ <span class="weather-value">31°C</span>
+                </div>
+            </div>
+            
+            <div class="last-updated">
+                🔄 <span>อัปเดตล่าสุด: 14:30</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="https://snack.expo.dev" target="_blank" class="deploy-button">
+                🚀 Open in Expo Snack
+            </a>
+            <p style="color: #666; font-size: 12px; margin-top: 10px;">
+                Copy the code from <code>snack-deploy/App.js</code> to test the full implementation
+            </p>
+        </div>
+    </div>
+</body>
+</html>

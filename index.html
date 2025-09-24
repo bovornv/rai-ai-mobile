@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAI AI Farming - Mobile App Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #45A049);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .card-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .button {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            background: #45A049;
+            transform: translateY(-2px);
+        }
+        
+        .features {
+            background: #E8F5E8;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .features-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2E7D32;
+            margin-bottom: 15px;
+        }
+        
+        .feature {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .feature::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        .credentials {
+            background: #FFF3E0;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #FF9800;
+        }
+        
+        .credentials-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #E65100;
+            margin-bottom: 10px;
+        }
+        
+        .credentials-text {
+            font-size: 14px;
+            color: #BF360C;
+            font-family: monospace;
+            background: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .demo-notice {
+            background: #E3F2FD;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .demo-notice-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1976D2;
+            margin-bottom: 8px;
+        }
+        
+        .demo-notice-text {
+            font-size: 14px;
+            color: #0D47A1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">🌱 RAI AI Farming</div>
+            <div class="subtitle">Smart farming solutions powered by AI</div>
+        </div>
+        
+        <div class="content">
+            <div class="demo-notice">
+                <div class="demo-notice-title">📱 Mobile App Demo</div>
+                <div class="demo-notice-text">This is a preview of the RAI AI Farming mobile app. The full app includes React Native components, real-time data, and AI features.</div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value">85%</div>
+                    <div class="stat-label">Farm Health</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Active Fields</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">45</div>
+                    <div class="stat-label">Crops</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Sensors</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">📊 Dashboard</div>
+                <div class="card-description">
+                    Monitor your farm's health, weather conditions, and crop growth in real-time with interactive charts and analytics.
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">🌾 Field Management</div>
+                <div class="card-description">
+                    Track multiple fields, manage crops, and monitor sensor data across your entire farm operation.
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">🤖 AI Insights</div>
+                <div class="card-description">
+                    Get AI-powered predictions for yield forecasting, disease detection, and irrigation optimization.
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">🌤️ Weather Monitoring</div>
+                <div class="card-description">
+                    Real-time weather data and forecasts to help you make informed farming decisions.
+                </div>
+            </div>
+            
+            <button class="button" onclick="launchApp()">
+                🚀 Launch Full App
+            </button>
+            
+            <div class="features">
+                <div class="features-title">Key Features:</div>
+                <div class="feature">Field Management & Monitoring</div>
+                <div class="feature">Crop Growth Tracking</div>
+                <div class="feature">Sensor Data Integration</div>
+                <div class="feature">Weather Forecast</div>
+                <div class="feature">AI Disease Detection</div>
+                <div class="feature">Yield Predictions</div>
+                <div class="feature">Smart Notifications</div>
+                <div class="feature">Analytics Dashboard</div>
+            </div>
+            
+            <div class="credentials">
+                <div class="credentials-title">Demo Credentials:</div>
+                <div class="credentials-text">Email: demo@farm.com</div>
+                <div class="credentials-text">Password: demo123</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function launchApp() {
+            alert('🚀 RAI AI Farming App Launched!\n\nThis is a demo version. The full React Native app includes:\n\n• Real-time sensor data\n• AI-powered predictions\n• Interactive charts\n• Push notifications\n• Offline capabilities\n\nTo run the full app, use: npx expo start');
+        }
+        
+        // Simulate real-time updates
+        setInterval(() => {
+            const healthValue = document.querySelector('.stat-value');
+            if (healthValue) {
+                const currentValue = parseInt(healthValue.textContent);
+                const newValue = currentValue + (Math.random() > 0.5 ? 1 : -1);
+                healthValue.textContent = Math.max(75, Math.min(95, newValue)) + '%';
+            }
+        }, 3000);
+    </script>
+</body>
+</html>

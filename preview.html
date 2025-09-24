@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RaiAI Mobile - Spray Window Preview</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: #4CAF50;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .location {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .spray-window {
+            background: white;
+            border: 1px solid #E0E0E0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .status-badge {
+            background: #F44336;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .reason {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        .weather-factors {
+            display: flex;
+            justify-content: space-around;
+            background: #F8F9FA;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        .weather-factor {
+            text-align: center;
+            flex: 1;
+        }
+        .weather-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .weather-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        .last-updated {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+        .remind-btn {
+            background: #E8F5E8;
+            color: #4CAF50;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        .crop-tabs {
+            display: flex;
+            background: #E8F5E8;
+            border-radius: 20px;
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+        .crop-tab {
+            flex: 1;
+            padding: 8px 16px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+        }
+        .crop-tab.active {
+            background: #4CAF50;
+            color: white;
+            font-weight: 600;
+        }
+        .preview-note {
+            background: #E3F2FD;
+            border: 1px solid #2196F3;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="preview-note">
+            <strong>🚀 Updated Spray Window Card</strong><br>
+            This preview shows the new Spray Window implementation with all MVP features:
+            <ul style="margin: 8px 0; padding-left: 20px;">
+                <li>✅ Dynamic status badge (Good/Caution/Don't spray)</li>
+                <li>✅ Reason text explanation for farmers</li>
+                <li>✅ Weather factors (wind, rain %, temperature)</li>
+                <li>✅ Last updated timestamp</li>
+                <li>❌ Share button removed (as per MVP requirements)</li>
+            </ul>
+        </div>
+
+        <div class="header">
+            <div class="logo">R</div>
+            <div class="title">RaiAI</div>
+            <div class="subtitle">วันนี้</div>
+            <div class="subtitle">จันทร์ 21 ต.ค.</div>
+            <div class="location">📍 ต. เทพาลัย, นครราชสีมา ✏️</div>
+        </div>
+
+        <div class="crop-tabs">
+            <div class="crop-tab active">ข้าว</div>
+            <div class="crop-tab">ทุเรียน</div>
+        </div>
+
+        <div class="spray-window">
+            <div class="status-badge">ห้ามพ่น</div>
+            <div class="reason">เนื่องจากมีโอกาสฝนตก</div>
+            
+            <div class="weather-factors">
+                <div class="weather-factor">
+                    <div class="weather-label">ลม</div>
+                    <div class="weather-value">18 กม./ชม.</div>
+                </div>
+                <div class="weather-factor">
+                    <div class="weather-label">ฝน</div>
+                    <div class="weather-value">45%</div>
+                </div>
+                <div class="weather-factor">
+                    <div class="weather-label">อุณหภูมิ</div>
+                    <div class="weather-value">31°C</div>
+                </div>
+            </div>
+            
+            <div class="last-updated">อัปเดตล่าสุด 14:30</div>
+            
+            <button class="remind-btn">เตือนฉัน</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px; color: #666; font-size: 12px;">
+            <strong>Expo Snack Preview:</strong><br>
+            <a href="https://snack.expo.dev/@your-username/rai-ai-mobile" target="_blank" style="color: #4CAF50;">
+                Open in Expo Snack →
+            </a>
+        </div>
+    </div>
+</body>
+</html>
