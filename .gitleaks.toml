@@ -1,0 +1,85 @@
+# Gitleaks configuration for RAI AI Farming Mobile App
+# This file defines patterns to detect secrets and sensitive information
+
+[gitleaks]
+  # Enable redaction of secrets in output
+  redact = true
+  
+  # Exit code when secrets are found
+  exit-code = 1
+  
+  # Verbose output
+  verbose = true
+
+# Custom rules for our specific use case
+[[rules]]
+  description = "Google API Key"
+  regex = '''AIza[0-9A-Za-z\\-_]{35}'''
+  tags = ["key", "google", "api"]
+
+[[rules]]
+  description = "Mapbox Secret Token"
+  regex = '''sk\\.[0-9A-Za-z\\-_]{20,}'''
+  tags = ["key", "mapbox", "secret"]
+
+[[rules]]
+  description = "Mapbox Public Token"
+  regex = '''pk\\.[0-9A-Za-z\\-_]{20,}'''
+  tags = ["key", "mapbox", "public"]
+
+[[rules]]
+  description = "MeteoSource API Key"
+  regex = '''[0-9a-z]{32}'''
+  tags = ["key", "meteosource", "api"]
+
+[[rules]]
+  description = "OpenWeatherMap API Key"
+  regex = '''[0-9a-f]{32}'''
+  tags = ["key", "openweather", "api"]
+
+[[rules]]
+  description = "Generic API Key"
+  regex = '''(?i)(api[_-]?key|apikey|access[_-]?key|secret[_-]?key|private[_-]?key)\\s*[:=]\\s*['\"]?[0-9a-zA-Z\\-_]{20,}['\"]?'''
+  tags = ["key", "api", "secret"]
+
+[[rules]]
+  description = "Bearer Token"
+  regex = '''(?i)bearer\\s+[0-9a-zA-Z\\-_]{20,}'''
+  tags = ["token", "bearer", "auth"]
+
+[[rules]]
+  description = "JWT Token"
+  regex = '''eyJ[0-9a-zA-Z\\-_]+\\.[0-9a-zA-Z\\-_]+\\.[0-9a-zA-Z\\-_]+'''
+  tags = ["token", "jwt", "auth"]
+
+# Allowlist patterns (exclude from scanning)
+[[allowlist]]
+  description = "Example files and documentation"
+  paths = [
+    "README.md",
+    "DEPLOYMENT.md",
+    "docs/",
+    ".env.example",
+    "*.example",
+    "*.sample"
+  ]
+
+[[allowlist]]
+  description = "Test files"
+  paths = [
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/test/**",
+    "**/tests/**"
+  ]
+
+[[allowlist]]
+  description = "Mock data and examples"
+  regex = '''(?i)(mock|example|sample|test|demo).*'''
+  paths = [
+    "**/mock*",
+    "**/example*",
+    "**/sample*",
+    "**/test*",
+    "**/demo*"
+  ]

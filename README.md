@@ -35,6 +35,12 @@ A professional mobile application designed specifically for Thai farmers in rura
 - Android Studio (for Android development)
 - Xcode (for iOS development, macOS only)
 
+### Security Notice
+
+🔒 **This app uses server-side proxies for all external API calls. No API keys are stored in the mobile app.**
+
+See [SECURITY.md](./SECURITY.md) for detailed security guidelines and best practices.
+
 ### Installation
 
 1. **Clone the repository**

@@ -37,7 +37,9 @@
     "extra": {
       "eas": {
         "projectId": "rai-ai-farming-mobile"
-      }
+      },
+      "API_BASE_URL": "https://api.rai-ai-farming.com/v1",
+      "NODE_ENV": "development"
     }
   }
 }

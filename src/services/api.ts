@@ -8,15 +8,13 @@ import {
   ApiResponse,
   PaginatedResponse 
 } from '../types';
-
-// Mock API base URL - replace with actual API endpoint
-const API_BASE_URL = 'https://api.rai-ai-farming.com/v1';
+import { environment } from '../config/environment';
 
 class ApiService {
   private baseUrl: string;
   private apiKey: string | null = null;
 
-  constructor(baseUrl: string = API_BASE_URL) {
+  constructor(baseUrl: string = environment.API_BASE_URL) {
     this.baseUrl = baseUrl;
   }
 
@@ -139,13 +137,22 @@ class ApiService {
     return this.request<SensorData[]>(`/sensors/latest?fieldId=${fieldId}`);
   }
 
-  // Weather data
+  // Weather data (server-side proxy)
   async getWeatherData(lat: number, lng: number): Promise<ApiResponse<WeatherData>> {
-    return this.request<WeatherData>(`/weather?lat=${lat}&lng=${lng}`);
+    return this.request<WeatherData>(`/api/weather?lat=${lat}&lng=${lng}`);
   }
 
   async getWeatherForecast(lat: number, lng: number, days: number = 7): Promise<ApiResponse<WeatherData>> {
-    return this.request<WeatherData>(`/weather/forecast?lat=${lat}&lng=${lng}&days=${days}`);
+    return this.request<WeatherData>(`/api/weather/forecast?lat=${lat}&lng=${lng}&days=${days}`);
+  }
+
+  // Geocoding (server-side proxy)
+  async geocodeAddress(query: string): Promise<ApiResponse<any>> {
+    return this.request<any>(`/api/geocode?query=${encodeURIComponent(query)}`);
+  }
+
+  async reverseGeocode(lat: number, lng: number): Promise<ApiResponse<any>> {
+    return this.request<any>(`/api/geocode/reverse?lat=${lat}&lng=${lng}`);
   }
 
   // AI Predictions
@@ -165,7 +172,7 @@ class ApiService {
     });
   }
 
-  // Disease detection
+  // Disease detection (server-side proxy)
   async detectDisease(imageUri: string, cropId: string): Promise<ApiResponse<any>> {
     const formData = new FormData();
     formData.append('image', {
@@ -175,13 +182,25 @@ class ApiService {
     } as any);
     formData.append('cropId', cropId);
 
-    return this.request('/ai/disease-detection', {
+    return this.request('/api/scan', {
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',
       },
       body: formData as any,
     });
+  }
+
+  // Market prices (server-side proxy)
+  async getMarketPrices(cropType?: string, location?: string): Promise<ApiResponse<any>> {
+    const params = new URLSearchParams();
+    if (cropType) params.append('cropType', cropType);
+    if (location) params.append('location', location);
+    
+    const queryString = params.toString();
+    const endpoint = queryString ? `/api/prices?${queryString}` : '/api/prices';
+    
+    return this.request<any>(endpoint);
   }
 
   // User management

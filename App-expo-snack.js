@@ -287,7 +287,7 @@ const GeocodeAPI = {
     try {
       // 1) Google Geocoding (primary) - using real API key with Thai language support
       const googleResponse = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=AIzaSyA0c40zoJGzs-Eaq5Pn5a80KRDMsyU5d9k&language=th&region=th&components=country:TH`
+        `${API_BASE_URL}/api/geocode?query=${encodeURIComponent(query)}&language=th&region=th&components=country:TH`
       );
       
       if (googleResponse.ok) {
@@ -331,7 +331,7 @@ const GeocodeAPI = {
       
       // 2) OpenCage Geocoding (fallback) - using real API key with Thai support
       const opencageResponse = await fetch(
-        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(query)}&key=YOUR_OPENCAGE_API_KEY_HERE&language=th&countrycode=th&limit=1`
+        `${API_BASE_URL}/api/geocode/fallback?query=${encodeURIComponent(query)}&language=th&countrycode=th&limit=1`
       );
       
       if (opencageResponse.ok) {
@@ -397,7 +397,7 @@ const GeocodeAPI = {
     try {
       // 1) Google Reverse Geocoding (primary)
       const googleResponse = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyA0c40zoJGzs-Eaq5Pn5a80KRDMsyU5d9k&language=th&region=th`
+        `${API_BASE_URL}/api/geocode/reverse?lat=${lat}&lng=${lng}&language=th&region=th`
       );
       
       if (googleResponse.ok) {
@@ -434,7 +434,7 @@ const GeocodeAPI = {
       
       // 2) OpenCage Reverse Geocoding (fallback)
       const opencageResponse = await fetch(
-        `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=YOUR_OPENCAGE_API_KEY_HERE&language=th&countrycode=th&limit=1`
+        `${API_BASE_URL}/api/geocode/reverse/fallback?lat=${lat}&lng=${lng}&language=th&countrycode=th&limit=1`
       );
       
       if (opencageResponse.ok) {
@@ -498,7 +498,7 @@ const PricesAPI = {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer your-api-key-here' // Replace with real API key
+          'Authorization': `Bearer ${API_TOKEN}` // Use server-provided token
         }
       });
       
@@ -948,7 +948,7 @@ const WeatherAPI = {
       console.log('Fetching weather from MeteoSource API...');
       // 1) MeteoSource (primary) - using actual API key
       const meteoResponse = await fetch(
-        `https://www.meteosource.com/api/v1/free/point?lat=${lat}&lon=${lng}&models=best_match&sections=all&key=69z56nx86o9g7ut24iwuzq5p1ik9rek8v61ggigg&lang=${lang}&_t=${Date.now()}`
+        `${API_BASE_URL}/api/weather?lat=${lat}&lng=${lng}&lang=${lang}&_t=${Date.now()}`
       );
       
       if (!meteoResponse.ok) {
@@ -989,7 +989,7 @@ const WeatherAPI = {
       // 2) OpenWeatherMap (fallback) - using actual API key
       console.log('Trying OpenWeatherMap API as fallback...');
       const owmResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=29e794ca05b243e559caf94c5a638d02&units=metric&lang=${lang}&_t=${Date.now()}`
+        `${API_BASE_URL}/api/weather/fallback?lat=${lat}&lng=${lng}&units=metric&lang=${lang}&_t=${Date.now()}`
       );
       
       if (!owmResponse.ok) {
