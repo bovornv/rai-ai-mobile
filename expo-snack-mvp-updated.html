@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ไร่ AI - Updated MVP Preview</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: #2E7D32;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .header p {
+            margin: 4px 0 0 0;
+            opacity: 0.9;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .content {
+            padding: 20px;
+        }
+        .spray-window-card {
+            background: #FFF3E0;
+            border: 2px solid #E0E0E0;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .spray-window-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .spray-window-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .status-badge {
+            background: #FF9800;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .reason-text {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .weather-factors {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 12px;
+        }
+        .weather-factor {
+            text-align: center;
+        }
+        .weather-factor-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .weather-factor-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .last-updated {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+        }
+        .crop-tabs {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .crop-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .crop-tab.active {
+            background: #4CAF50;
+            color: white;
+        }
+        .crop-tab-text {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .price-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .price-card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .price-commodity {
+            font-size: 16px;
+            color: #333;
+            flex: 1;
+        }
+        .price-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .price-change {
+            font-size: 14px;
+            color: #4CAF50;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .price-source {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
+            text-align: center;
+        }
+        .scan-button {
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 16px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .scan-button:hover {
+            background: #45a049;
+        }
+        .weather-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .weather-card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        .forecast-container {
+            display: flex;
+            justify-content: space-around;
+        }
+        .forecast-item {
+            text-align: center;
+            flex: 1;
+        }
+        .forecast-day {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .forecast-temp {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 4px;
+        }
+        .forecast-rain {
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+        }
+        .tab-bar {
+            display: flex;
+            background: #2E7D32;
+            padding: 8px 0 20px 0;
+        }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            color: #9E9E9E;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin: 0 4px;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+        .settings-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .settings-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        .language-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        .language-button {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 2px solid #E0E0E0;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .language-button.active {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+        }
+        .language-button-text {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .switch-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .switch-label {
+            font-size: 16px;
+            color: #333;
+            flex: 1;
+        }
+        .switch {
+            width: 50px;
+            height: 30px;
+            background: #4CAF50;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+        }
+        .switch::after {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            right: 2px;
+            transition: all 0.3s;
+        }
+        .preview-info {
+            background: #e3f2fd;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        .preview-info h3 {
+            margin: 0 0 8px 0;
+            color: #1976d2;
+        }
+        .preview-info p {
+            margin: 4px 0;
+            font-size: 14px;
+            color: #1565c0;
+        }
+        .mvp-features {
+            background: #f3e5f5;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #9c27b0;
+        }
+        .mvp-features h3 {
+            margin: 0 0 8px 0;
+            color: #7b1fa2;
+        }
+        .mvp-features ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .mvp-features li {
+            margin: 4px 0;
+            font-size: 14px;
+            color: #6a1b9a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ไร่ AI</h1>
+            <p>ระบบเกษตรอัจฉริยะ</p>
+        </div>
+        
+        <div class="content">
+            <div class="preview-info">
+                <h3>📱 Updated MVP Preview</h3>
+                <p>• John Deere-inspired design with big fonts for rural farmers</p>
+                <p>• Spray Window card with status badges and weather factors</p>
+                <p>• Crop tabs for Rice (ข้าว) and Durian (ทุเรียน)</p>
+                <p>• Reference prices with proper units and source attribution</p>
+                <p>• Comprehensive Settings with language switching</p>
+            </div>
+
+            <div class="mvp-features">
+                <h3>🎯 MVP Features Implemented</h3>
+                <ul>
+                    <li>Spray Window badge (Good/Caution/Don't spray)</li>
+                    <li>7-day weather forecast with real data</li>
+                    <li>Today's crop prices (Rice & Durian)</li>
+                    <li>Location selection with geocoding</li>
+                    <li>Thai/English language switching</li>
+                    <li>Local notifications for spray reminders</li>
+                    <li>Data privacy controls</li>
+                </ul>
+            </div>
+
+            <!-- Spray Window Card -->
+            <div class="spray-window-card">
+                <div class="spray-window-header">
+                    <span class="spray-window-title">หน้าต่างฉีดพ่น</span>
+                    <span class="status-badge">ระวัง</span>
+                </div>
+                <div class="reason-text">เนื่องจากมีโอกาสฝนตก</div>
+                <div class="weather-factors">
+                    <div class="weather-factor">
+                        <div class="weather-factor-label">ลม</div>
+                        <div class="weather-factor-value">15 km/h</div>
+                    </div>
+                    <div class="weather-factor">
+                        <div class="weather-factor-label">ฝน</div>
+                        <div class="weather-factor-value">60%</div>
+                    </div>
+                    <div class="weather-factor">
+                        <div class="weather-factor-label">อุณหภูมิ</div>
+                        <div class="weather-factor-value">28°C</div>
+                    </div>
+                </div>
+                <div class="last-updated">อัปเดตล่าสุด 00:54</div>
+            </div>
+
+            <!-- Crop Tabs -->
+            <div class="crop-tabs">
+                <div class="crop-tab active">
+                    <span class="crop-tab-text">ข้าว</span>
+                </div>
+                <div class="crop-tab">
+                    <span class="crop-tab-text">ทุเรียน</span>
+                </div>
+            </div>
+
+            <!-- Price Card -->
+            <div class="price-card">
+                <div class="price-card-title">ราคาวันนี้</div>
+                <div class="price-item">
+                    <span class="price-commodity">ข้าวหอมมะลิ</span>
+                    <span class="price-value">8,500 บ./ตัน</span>
+                    <span class="price-change">+2.5%</span>
+                </div>
+                <div class="price-item">
+                    <span class="price-commodity">ทุเรียนหมอนทอง</span>
+                    <span class="price-value">120 บ./กก.</span>
+                    <span class="price-change">+1.2%</span>
+                </div>
+                <div class="price-source">ข้อมูลจากตลาดกลาง</div>
+            </div>
+
+            <!-- Scan Button -->
+            <div class="scan-button" onclick="alert('ฟีเจอร์สแกนโรคพืช - ใช้กล้องเพื่อสแกนใบข้าวและตรวจสอบโรคพืช')">
+                📱 สแกนตอนนี้
+            </div>
+
+            <!-- Weather Forecast -->
+            <div class="weather-card">
+                <div class="weather-card-title">พยากรณ์อากาศ 7 วัน</div>
+                <div class="forecast-container">
+                    <div class="forecast-item">
+                        <div class="forecast-day">วันนี้</div>
+                        <div>🌤️</div>
+                        <div class="forecast-temp">28°</div>
+                        <div class="forecast-rain">20%</div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">พรุ่งนี้</div>
+                        <div>☀️</div>
+                        <div class="forecast-temp">30°</div>
+                        <div class="forecast-rain">5%</div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">วันศุกร์</div>
+                        <div>🌧️</div>
+                        <div class="forecast-temp">26°</div>
+                        <div class="forecast-rain">80%</div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">วันเสาร์</div>
+                        <div>☁️</div>
+                        <div class="forecast-temp">24°</div>
+                        <div class="forecast-rain">40%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Preview -->
+            <div class="settings-section">
+                <div class="settings-label">การตั้งค่า</div>
+                <div class="language-buttons">
+                    <div class="language-button active">ไทย</div>
+                    <div class="language-button">English</div>
+                </div>
+                <div class="switch-row">
+                    <span class="switch-label">เตือนหน้าต่างฉีดพ่น</span>
+                    <div class="switch"></div>
+                </div>
+                <div class="switch-row">
+                    <span class="switch-label">อนุญาตให้ใช้การสแกนของฉันเพื่อพัฒนาระบบ</span>
+                    <div class="switch" style="background: #ccc;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Tab Navigation -->
+        <div class="tab-bar">
+            <div class="tab active">🏠 หน้าแรก</div>
+            <div class="tab">📍 แปลง</div>
+            <div class="tab">📱 สแกน</div>
+            <div class="tab">🌤️ อากาศ</div>
+            <div class="tab">⚙️ ตั้งค่า</div>
+        </div>
+    </div>
+
+    <script>
+        // Simple tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Language switching
+        document.querySelectorAll('.language-button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.language-button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Switch toggles
+        document.querySelectorAll('.switch').forEach(switchEl => {
+            switchEl.addEventListener('click', function() {
+                if (this.style.background === 'rgb(76, 175, 80)') {
+                    this.style.background = '#ccc';
+                } else {
+                    this.style.background = '#4CAF50';
+                }
+            });
+        });
+
+        // Scan button functionality
+        document.querySelector('.scan-button').addEventListener('click', function() {
+            alert('ฟีเจอร์สแกนโรคพืช\n\n• ใช้กล้องเพื่อสแกนใบข้าว\n• AI วิเคราะห์โรคพืช\n• แสดงผลการวินิจฉัย\n• ให้คำแนะนำการรักษา');
+        });
+    </script>
+</body>
+</html>
