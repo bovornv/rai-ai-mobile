@@ -1,236 +1,370 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RaiAI Mobile - Expo Snack Preview</title>
+    <title>ไร่ AI - Mobile App Preview</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f5f5f5;
         }
         .container {
             max-width: 400px;
             margin: 0 auto;
             background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         .header {
+            background: #2E7D32;
+            color: white;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 20px;
         }
-        .logo {
-            width: 40px;
-            height: 40px;
-            background: #4CAF50;
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
             font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 10px;
         }
-        .title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
+        .header p {
+            margin: 4px 0 0 0;
+            opacity: 0.9;
         }
-        .subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 15px;
+        .content {
+            padding: 20px;
         }
-        .location {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-        .crop-tabs {
-            display: flex;
-            background: #E8F5E8;
-            border-radius: 20px;
-            padding: 4px;
-            margin-bottom: 20px;
-        }
-        .crop-tab {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 16px;
-            border-radius: 16px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #666;
-            cursor: pointer;
-            gap: 4px;
-        }
-        .crop-tab.active {
-            background: #4CAF50;
-            color: white;
-            font-weight: 600;
-        }
-        .spray-window {
+        .card {
             background: white;
-            border: 1px solid #E0E0E0;
+            border: 1px solid #e0e0e0;
             border-radius: 12px;
             padding: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .spray-header {
+        .card-header {
             display: flex;
             align-items: center;
             margin-bottom: 12px;
         }
-        .spray-title {
-            font-size: 16px;
+        .card-title {
+            font-size: 18px;
             font-weight: 600;
             color: #333;
             margin-left: 8px;
         }
-        .status-badge {
-            background: #F44336;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
+        .weather-info {
             text-align: center;
-            font-weight: bold;
-            margin-bottom: 12px;
-            display: inline-block;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .reason {
-            text-align: center;
-            color: #666;
-            font-style: italic;
             margin-bottom: 16px;
-            font-size: 14px;
         }
-        .weather-factors {
+        .temperature {
+            font-size: 48px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 0;
+        }
+        .condition {
+            font-size: 16px;
+            color: #666;
+            margin: 4px 0;
+        }
+        .humidity {
+            font-size: 14px;
+            color: #999;
+        }
+        .forecast {
             display: flex;
             justify-content: space-around;
-            background: #F8F9FA;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 16px;
+            margin-top: 16px;
         }
-        .weather-factor {
-            display: flex;
-            align-items: center;
-            flex: 1;
-            justify-content: center;
-            gap: 4px;
+        .forecast-item {
+            text-align: center;
         }
-        .weather-value {
+        .forecast-day {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .forecast-temp {
             font-size: 14px;
             font-weight: 600;
             color: #333;
         }
-        .last-updated {
+        .field-info {
+            margin-top: 8px;
+        }
+        .field-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .field-detail {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+        .crop-info {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+        .crop-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        .crop-status, .crop-health {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+        .crop-health {
+            color: #4CAF50;
+            font-weight: 600;
+        }
+        .task-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 8px;
-            gap: 4px;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
         }
-        .preview-note {
-            background: #E3F2FD;
-            border: 1px solid #2196F3;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 20px;
+        .task-info {
+            flex: 1;
+        }
+        .task-title {
             font-size: 14px;
-            color: #1976D2;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 2px;
         }
-        .deploy-button {
+        .task-subtitle {
+            font-size: 12px;
+            color: #666;
+        }
+        .task-button {
+            display: flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 16px;
+            border: 1px solid #4CAF50;
+            background: #f8f9fa;
+            font-size: 12px;
+            color: #4CAF50;
+        }
+        .task-button.completed {
+            border-color: #ddd;
+            background: #f0f0f0;
+            color: #666;
+        }
+        .scan-button {
             background: #4CAF50;
             color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: 600;
+            padding: 16px;
+            border-radius: 12px;
             text-align: center;
-            margin: 10px 0;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 16px 0;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-        .deploy-button:hover {
+        .scan-button:hover {
             background: #45a049;
+        }
+        .tab-bar {
+            display: flex;
+            background: #2E7D32;
+            padding: 8px 0 20px 0;
+        }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            color: #9E9E9E;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin: 0 4px;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+        .mvp-notice {
+            display: flex;
+            align-items: center;
+            background: #FFF3E0;
+            padding: 12px;
+            margin: 16px 0;
+            border-radius: 8px;
+            border-left: 4px solid #FF9800;
+        }
+        .mvp-notice-text {
+            font-size: 12px;
+            color: #E65100;
+            margin-left: 8px;
+        }
+        .preview-info {
+            background: #e3f2fd;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        .preview-info h3 {
+            margin: 0 0 8px 0;
+            color: #1976d2;
+        }
+        .preview-info p {
+            margin: 4px 0;
+            font-size: 14px;
+            color: #1565c0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="preview-note">
-            <strong>🚀 Updated RaiAI Mobile App</strong><br>
-            All features from your screenshot have been implemented and deployed to Expo Snack!
-        </div>
-
         <div class="header">
-            <div class="logo">R</div>
-            <div class="title">RaiAI</div>
-            <div class="subtitle">วันนี้</div>
-            <div class="subtitle">จันทร์ 21 ต.ค. 2567</div>
-            <div class="location">
-                📍 ต. เทพาลัย, นครราชสีมา ✏️
+            <h1>ไร่ AI</h1>
+            <p>ระบบเกษตรอัจฉริยะ</p>
+        </div>
+        
+        <div class="content">
+            <div class="preview-info">
+                <h3>📱 Mobile App Preview</h3>
+                <p>• หน้าจอหลัก: ข้อมูลสภาพอากาศ, แปลงข้าว, งานที่ต้องทำ</p>
+                <p>• จัดการแปลง: ดูและแก้ไขข้อมูลแปลง</p>
+                <p>• สแกนโรคพืช: ใช้ AI ตรวจสอบสุขภาพพืช</p>
+                <p>• ราคาข้าว: ราคาปัจจุบันและแนวโน้ม</p>
+            </div>
+
+            <!-- Weather Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span>🌤️</span>
+                    <span class="card-title">สภาพอากาศ</span>
+                </div>
+                <div class="weather-info">
+                    <div class="temperature">28°C</div>
+                    <div class="condition">Partly Cloudy</div>
+                    <div class="humidity">ความชื้น 65%</div>
+                </div>
+                <div class="forecast">
+                    <div class="forecast-item">
+                        <div class="forecast-day">วันนี้</div>
+                        <div>🌤️</div>
+                        <div class="forecast-temp">28°</div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">พรุ่งนี้</div>
+                        <div>☀️</div>
+                        <div class="forecast-temp">30°</div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">วันศุกร์</div>
+                        <div>🌧️</div>
+                        <div class="forecast-temp">26°</div>
+                    </div>
+                    <div class="forecast-item">
+                        <div class="forecast-day">วันเสาร์</div>
+                        <div>☁️</div>
+                        <div class="forecast-temp">24°</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Field Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span>📍</span>
+                    <span class="card-title">แปลงข้าว</span>
+                </div>
+                <div class="field-info">
+                    <div class="field-name">ไร่นาข้าว ภาคกลาง</div>
+                    <div class="field-detail">พื้นที่ 5.2 ไร่</div>
+                    <div class="field-detail">ดิน: ดินร่วนปนทราย</div>
+                    <div class="crop-info">
+                        <div class="crop-name">ข้าวหอมมะลิ</div>
+                        <div class="crop-status">สถานะ: growing</div>
+                        <div class="crop-health">สุขภาพ: 85%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span>📋</span>
+                    <span class="card-title">งานที่ต้องทำ</span>
+                </div>
+                <div class="task-item">
+                    <div class="task-info">
+                        <div class="task-title">ตรวจสอบความชื้นในดิน</div>
+                        <div class="task-subtitle">ควรตรวจสอบทุก 3 วัน</div>
+                    </div>
+                    <div class="task-button">👁️ ดู</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-info">
+                        <div class="task-title">รดน้ำแปลงข้าว</div>
+                        <div class="task-subtitle">กำหนดการรดน้ำครั้งต่อไป</div>
+                    </div>
+                    <div class="task-button">👁️ ดู</div>
+                </div>
+                <div class="task-item">
+                    <div class="task-info">
+                        <div class="task-title">ตรวจสอบโรคพืช</div>
+                        <div class="task-subtitle">สแกนใบข้าวเพื่อตรวจโรค</div>
+                    </div>
+                    <div class="task-button completed">✓ เสร็จ</div>
+                </div>
+            </div>
+
+            <!-- Scan Button -->
+            <div class="scan-button" onclick="alert('ฟีเจอร์สแกนโรคพืช - ใช้กล้องเพื่อสแกนใบข้าวและตรวจสอบโรคพืช')">
+                📱 สแกนโรคพืช
+            </div>
+
+            <!-- MVP Notice -->
+            <div class="mvp-notice">
+                <span>ℹ️</span>
+                <span class="mvp-notice-text">
+                    MVP: จำกัด 1 แปลง, 1 สแกน/วัน (อัปเกรดเพื่อเพิ่มเติม)
+                </span>
             </div>
         </div>
 
-        <div class="crop-tabs">
-            <div class="crop-tab active">
-                🍃 ข้าว
-            </div>
-            <div class="crop-tab">
-                🍃 ทุเรียน
-            </div>
-        </div>
-
-        <div class="spray-window">
-            <div class="spray-header">
-                ⚠️ <span class="spray-title">ช่วงเวลาฉีดพ่น - Spray Window</span>
-            </div>
-            
-            <div class="status-badge">ไม่ควรพ่นวันนี้</div>
-            <div class="reason">เนื่องจากมีโอกาสฝนตก</div>
-            
-            <div class="weather-factors">
-                <div class="weather-factor">
-                    🍃 <span class="weather-value">18 กม./ชม.</span>
-                </div>
-                <div class="weather-factor">
-                    ☁️ <span class="weather-value">45%</span>
-                </div>
-                <div class="weather-factor">
-                    🌡️ <span class="weather-value">31°C</span>
-                </div>
-            </div>
-            
-            <div class="last-updated">
-                🔄 <span>อัปเดตล่าสุด: 14:30</span>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="https://snack.expo.dev" target="_blank" class="deploy-button">
-                🚀 Open in Expo Snack
-            </a>
-            <p style="color: #666; font-size: 12px; margin-top: 10px;">
-                Copy the code from <code>snack-deploy/App.js</code> to test the full implementation
-            </p>
+        <!-- Bottom Tab Navigation -->
+        <div class="tab-bar">
+            <div class="tab active">🏠 หน้าแรก</div>
+            <div class="tab">📍 แปลง</div>
+            <div class="tab">📱 สแกน</div>
+            <div class="tab">📈 ราคา</div>
         </div>
     </div>
+
+    <script>
+        // Simple tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Scan button functionality
+        document.querySelector('.scan-button').addEventListener('click', function() {
+            alert('ฟีเจอร์สแกนโรคพืช\n\n• ใช้กล้องเพื่อสแกนใบข้าว\n• AI วิเคราะห์โรคพืช\n• แสดงผลการวินิจฉัย\n• ให้คำแนะนำการรักษา');
+        });
+    </script>
 </body>
 </html>

@@ -157,3 +157,20 @@ prefs {
 - Spray reminder schedules a local notification at selected time; reschedules on time change; only fires when state = Good.
 - Clear cached data wipes weather/prices cache, leaves Field/Scan/prefs.
 - Support link opens; Version/Build visible.
+
+
+---
+
+## Distribution (MVP vs Future Versions)
+
+- **MVP (Months 0–2): Android only**
+  - Target: Thai farmers in rural areas (majority on Android devices, mid-range OPPO/Vivo/Samsung/Xiaomi).
+  - Package as APK + Google Play distribution.
+  - Ensure support for Android 9+ and 2–4 GB RAM devices (optimize performance).
+
+- **V1 (Months 3–6): Add iOS**
+  - Release on App Store mainly for credibility (investors, partners, co-ops) and urban/younger users.
+  - Keep core code cross-platform (React Native/Expo) from start, but skip iOS builds in MVP to save time.
+
+- **V2+ (6–12 months): Maintain both platforms**
+  - Feature parity Android/iOS, but Android will remain the dominant farmer base.
